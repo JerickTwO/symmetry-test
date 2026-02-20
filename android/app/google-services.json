@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "608612419819",
+    "project_id": "symmetry-test-52eeb",
+    "storage_bucket": "symmetry-test-52eeb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:608612419819:android:d9c1370875636eded716ae",
+        "android_client_info": {
+          "package_name": "com.example.prueba"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQ0_vjIM_Qx2AcK27CvseJC8PLvFMj_fU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
