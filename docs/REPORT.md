@@ -28,7 +28,7 @@ The application uses **Cloud Firestore** as its NoSQL document database and **Fi
 
 ## 2. Collection: `users`
 
-Stores user profile information. A document is created when a user registers via `signUp()`. The document ID matches the Firebase Auth UID.
+Stores user profile information. User documents must be created manually by an administrator or through the Firebase console. The document ID matches the Firebase Auth UID.
 
 ### Schema
 
@@ -210,13 +210,9 @@ symmetry-test-52eeb.firebasestorage.app
 ## 7. Data Flow Summary
 
 ```
-[User Registration]
-  Firebase Auth → creates auth user
-  Firestore → creates users/{uid} document
-
 [User Login]
   Firebase Auth → authenticates
-  Firestore → reads users/{uid} for profile data
+  Firestore → reads users/{uid} for profile data (if exists)
 
 [Create Article]
   Storage → uploads image to media/articles/{tempId}/{file}

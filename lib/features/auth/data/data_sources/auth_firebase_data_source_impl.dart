@@ -78,18 +78,6 @@ class AuthFirebaseDataSourceImpl implements AuthFirebaseDataSource {
     return UserModel.fromRawData(userData);
   }
 
-  Future<void> _saveUserToFirestore(UserModel userModel) async {
-    try {
-      await _firestore
-          .collection(FirebaseConstants.usersCollection)
-          .doc(userModel.uid)
-          .set(userModel.toJson())
-          .timeout(Duration(seconds: 10));
-    } catch (_) {
-      // Si falla Firestore, aún retornamos el usuario ya que se creó en Auth
-    }
-  }
-
   Exception _mapSignInException(FirebaseAuthException e) {
     switch (e.code) {
       case 'user-not-found':

@@ -1,137 +1,135 @@
-# News App - Flutter con Clean Architecture
+# News App - Flutter with Clean Architecture
 
-Una aplicación de noticias desarrollada en Flutter usando Clean Architecture, Firebase Authentication y BLoC para el manejo de estado.
+A news application developed in Flutter using Clean Architecture, Firebase Authentication and BLoC for state management.
 
-## 🏗️ Arquitectura
+## 🏗️ Architecture
 
-El proyecto sigue los principios de **Clean Architecture** con las siguientes capas:
+The project follows **Clean Architecture** principles with the following layers:
 
 ```
 lib/
 │
-├── core/                       # Compartido en toda la app
-│   ├── constants/              # Constantes de la aplicación
-│   ├── errors/                 # Manejo de errores (Failures)
-│   └── usecase/                # Interfaz genérica para casos de uso
+├── core/                       # Shared across the entire app
+│   ├── constants/              # Application constants
+│   ├── errors/                 # Error handling (Failures)
+│   └── usecase/                # Generic interface for use cases
 │
-├── data/                       # Capa de DATOS
-│   ├── models/                 # Modelos que parsean Firebase/JSON
-│   ├── repositories/           # Implementación de repositorios
-│   └── sources/                # Servicios de Firebase
+├── data/                       # DATA Layer
+│   ├── models/                 # Models that parse Firebase/JSON
+│   ├── repositories/           # Repository implementations
+│   └── sources/                # Firebase services
 │
-├── domain/                     # Capa de NEGOCIO (lógica pura)
-│   ├── entities/               # Entidades de dominio
-│   ├── repositories/           # Contratos/Interfaces
-│   └── usecases/               # Casos de uso (acciones específicas)
+├── domain/                     # BUSINESS Layer (pure logic)
+│   ├── entities/               # Domain entities
+│   ├── repositories/           # Contracts/Interfaces
+│   └── usecases/               # Use cases (specific actions)
 │
-├── presentation/               # Capa VISUAL (UI + BLoC)
-│   ├── auth/                   # Autenticación
-│   │   ├── pages/              # Pantalla de login
-│   │   └── bloc/               # BLoC para autenticación
-│   ├── home/                   # Pantalla principal
-│   └── splash/                 # Pantalla de carga
+├── presentation/               # UI Layer (UI + BLoC)
+│   ├── auth/                   # Authentication
+│   │   ├── pages/              # Login screen
+│   │   └── bloc/               # BLoC for authentication
+│   ├── home/                   # Main screen
+│   └── splash/                 # Loading screen
 │
-├── service_locator.dart        # Inyección de dependencias (GetIt)
-└── main.dart                   # Punto de entrada
+├── service_locator.dart        # Dependency injection (GetIt)
+└── main.dart                   # Entry point
 ```
 
-## 🚀 Características Implementadas
+## 🚀 Implemented Features
 
-### ✅ Sistema de Autenticación
-- **Login** con email y contraseña
+### ✅ Authentication System
+- **Login** with email and password
 - **Logout** 
-- **Verificación automática** del estado de autenticación
-- **Manejo de errores** de Firebase Auth
-- **Validación de formularios**
+- **Automatic verification** of authentication status
+- **Firebase Auth error handling**
+- **Form validation**
 
-### ✅ Arquitectura Clean
-- **Separación de responsabilidades** en capas
-- **Inversión de dependencias** con repositorios abstractos
-- **Casos de uso** específicos para cada acción
-- **Manejo de errores** con Either (Success/Failure)
+### ✅ Clean Architecture
+- **Separation of responsibilities** in layers
+- **Dependency inversion** with abstract repositories
+- **Specific use cases** for each action
+- **Error handling** with Either (Success/Failure)
 
-### ✅ Manejo de Estado
-- **BLoC pattern** para gestión de estado
-- **Estado reactivo** en toda la aplicación
-- **Eventos y estados** bien definidos
+### ✅ State Management
+- **BLoC pattern** for state management
+- **Reactive state** throughout the application
+- **Well-defined events and states**
 
-### ✅ Inyección de Dependencias
-- **GetIt** para service locator
-- **Dependencias configuradas** automáticamente
-- **Fácil testing** y mantenimiento
+### ✅ Dependency Injection
+- **GetIt** for service locator
+- **Automatically configured dependencies**
+- **Easy testing** and maintenance
 
-## 📱 Pantallas
+## 📱 Screens
 
-### 🔐 Autenticación
-- **SignIn**: Inicio de sesión con email/contraseña
-- **Splash**: Pantalla de carga inicial
+### 🔐 Authentication
+- **SignIn**: Login with email/password
+- **Splash**: Initial loading screen
 
-### 🏠 Principal
-- **Home**: Pantalla principal (preparada para mostrar noticias)
+### 🏠 Main
+- **Home**: Main screen (ready to display news)
 
-## 🛠️ Tecnologías Utilizadas
+## 🛠️ Technologies Used
 
-- **Flutter** - Framework de UI
-- **Firebase Auth** - Autenticación
-- **Cloud Firestore** - Base de datos
-- **BLoC** - Manejo de estado
-- **GetIt** - Inyección de dependencias
-- **Dartz** - Programación funcional (Either)
-- **Equatable** - Comparación de objetos
+- **Flutter** - UI Framework
+- **Firebase Auth** - Authentication
+- **Cloud Firestore** - Database
+- **BLoC** - State management
+- **GetIt** - Dependency injection
+- **Dartz** - Functional programming (Either)
+- **Equatable** - Object comparison
 
-## 🚀 Cómo ejecutar
+## 🚀 How to Run
 
-1. **Instalar dependencias:**
+1. **Install dependencies:**
 ```bash
 flutter pub get
 ```
 
-2. **Configurar Firebase:**
-   - El proyecto ya está configurado con Firebase
-   - Los archivos de configuración están incluidos
+2. **Configure Firebase:**
+   - The project is already configured with Firebase
+   - Configuration files are included
 
-3. **Ejecutar la aplicación:**
+3. **Run the application:**
 ```bash
 flutter run
 ```
 
-## 📂 Estructura de Archivos Clave
+## 📂 Key File Structure
 
 ### Core Layer
-- `failures.dart` - Tipos de errores de la aplicación
-- `app_constants.dart` - Constantes y strings
-- `usecase.dart` - Interface genérica para casos de uso
+- `failures.dart` - Application error types
+- `app_constants.dart` - Constants and strings
+- `usecase.dart` - Generic interface for use cases
 
 ### Domain Layer
-- `user.dart` - Entidad de usuario
-- `auth_repository.dart` - Contrato del repositorio
-- `login_user.dart` - Caso de uso de login
+- `user.dart` - User entity
+- `auth_repository.dart` - Repository contract
+- `login_user.dart` - Login use case
 
 ### Data Layer
-- `user_model.dart` - Modelo de datos de usuario
-- `auth_firebase_service.dart` - Servicio de Firebase Auth
-- `auth_repository_impl.dart` - Implementación del repositorio
+- `user_model.dart` - User data model
+- `auth_firebase_service.dart` - Firebase Auth service
+- `auth_repository_impl.dart` - Repository implementation
 
 ### Presentation Layer
-- `auth_bloc.dart` - BLoC de autenticación
-- `signin_page.dart` - Pantalla de login
+- `auth_bloc.dart` - Authentication BLoC
+- `signin_page.dart` - Login screen
 
-## 🔧 Próximas Características
+## 🔧 Upcoming Features
 
-- [ ] Sistema de noticias/artículos
-- [ ] Categorías de noticias
-- [ ] Favoritos
-- [ ] Búsqueda de artículos
-- [ ] Modo offline
+- [ ] News/articles system
+- [ ] News categories
+- [ ] Favorites
+- [ ] Article search
+- [ ] Offline mode
 - [ ] Push notifications
 
-## 📝 Notas de Desarrollo
+## 📝 Development Notes
 
-- El proyecto está preparado para escalar fácilmente
-- La arquitectura permite agregar nuevas características sin afectar el código existente
-- Cada capa tiene responsabilidades bien definidas
-- El manejo de errores es consistente en toda la aplicación
+- The project is prepared to scale easily
+- The architecture allows adding new features without affecting existing code
+- Each layer has well-defined responsibilities
+- Error handling is consistent throughout the application
 
 ---
-
-**Desarrollado con ❤️ usando Clean Architecture**
