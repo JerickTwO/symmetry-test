@@ -4,6 +4,12 @@
 **Project ID:** `symmetry-test-52eeb`  
 **Date:** February 20, 2026
 
+## 📹 Application Demo
+
+**Watch the complete application functionality:** [Demo Video](https://drive.google.com/file/d/17NCXZKEuR28kD_95zCuS43Htidxc6jrA/view?usp=drive_link)
+
+This demonstration shows the full workflow including database operations, authentication, and UI interactions.
+
 ---
 
 ## 1. Overview

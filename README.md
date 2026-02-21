@@ -2,6 +2,19 @@
 
 A news application developed in Flutter using Clean Architecture, Firebase Authentication and BLoC for state management.
 
+## 📹 Demo Video
+
+**Watch the application in action:** [Application Demo Video](https://drive.google.com/file/d/17NCXZKEuR28kD_95zCuS43Htidxc6jrA/view?usp=drive_link)
+
+This video demonstrates:
+- ✅ User authentication (login/logout)
+- ✅ Article creation and editing
+- ✅ Article listing and detailed view
+- ✅ Authentication protection for editing features
+- ✅ Responsive UI and smooth navigation
+
+---
+
 ## 🏗️ Architecture
 
 The project follows **Clean Architecture** principles with the following layers:

@@ -16,7 +16,16 @@ class ArticlesListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return BlocListener<AuthBloc, auth.AuthState>(
+      listener: (context, authState) {
+        if (authState is auth.AuthUnauthenticated) {
+          Navigator.of(context).pushNamedAndRemoveUntil(
+            '/signin',
+            (route) => false,
+          );
+        }
+      },
+      child: Scaffold(
       appBar: AppBar(
         title: const Text('Noticias'),
         actions: [
@@ -75,6 +84,7 @@ class ArticlesListScreen extends StatelessWidget {
           );
         },
       ),
+    ),
     );
   }
 
