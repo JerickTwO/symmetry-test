@@ -107,7 +107,7 @@ class ArticleDetailScreen extends StatelessWidget {
         width: double.infinity,
         height: 200,
         decoration: BoxDecoration(
-          color: Colors.blue.withValues(alpha: 0.1),
+          color: Colors.blue.withOpacity(0.1),
           borderRadius: BorderRadius.circular(12),
         ),
         child: const Icon(Icons.article, size: 80, color: Colors.blue),
@@ -139,7 +139,7 @@ class ArticleDetailScreen extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
-        color: Colors.blue.withValues(alpha: 0.1),
+        color: Colors.blue.withOpacity(0.1),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Text(

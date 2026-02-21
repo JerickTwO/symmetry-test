@@ -95,7 +95,7 @@ class ArticleCard extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       margin: const EdgeInsets.only(bottom: 8),
       decoration: BoxDecoration(
-        color: Colors.blue.withValues(alpha: 0.1),
+        color: Colors.blue.withOpacity(0.1),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Text(
@@ -193,7 +193,7 @@ class ArticleCard extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: 120,
-      color: Colors.blue.withValues(alpha: 0.05),
+      color: Colors.blue.withOpacity(0.05),
       child: const Icon(
         Icons.article_outlined,
         size: 50,
