@@ -52,13 +52,6 @@ Stores user profile information. A document is created when a user registers via
 }
 ```
 
-### Access Pattern
-
-| Operation | Method | Trigger |
-|---|---|---|
-| Create | `set()` | User registration (`signUp`) |
-| Read (by ID) | `doc(uid).get()` | Login (`signIn`) and session check (`getCurrentUser`) |
-
 ### Notes
 
 - On **web platform**, the user document may not be created (Firestore is skipped due to CORS/config issues). The app falls back to Firebase Auth data (`user.displayName`, `user.email`).

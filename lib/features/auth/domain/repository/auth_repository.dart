@@ -10,12 +10,6 @@ abstract class AuthRepository {
     required String password,
   });
 
-  Future<DataState<UserEntity>> signUp({
-    required String email,
-    required String password,
-    required String fullName,
-  });
-
   Future<void> signOut();
 
   Future<DataState<UserEntity?>> getCurrentUser();

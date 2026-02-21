@@ -28,24 +28,6 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<DataState<UserEntity>> signUp({
-    required String email,
-    required String password,
-    required String fullName,
-  }) async {
-    try {
-      final model = await _dataSource.signUp(
-        email: email,
-        password: password,
-        fullName: fullName,
-      );
-      return DataState.success(model.toEntity());
-    } catch (e) {
-      return DataState.error(e.toString());
-    }
-  }
-
-  @override
   Future<void> signOut() async {
     await _dataSource.signOut();
   }

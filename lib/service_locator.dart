@@ -10,7 +10,6 @@ import 'features/auth/domain/repository/auth_repository.dart';
 import 'features/auth/domain/use_cases/get_current_user_use_case.dart';
 import 'features/auth/domain/use_cases/sign_in_use_case.dart';
 import 'features/auth/domain/use_cases/sign_out_use_case.dart';
-import 'features/auth/domain/use_cases/sign_up_use_case.dart';
 import 'features/auth/presentation/bloc/auth_bloc.dart';
 import 'features/articles/data/data_sources/article_firebase_data_source.dart';
 import 'features/articles/data/data_sources/article_firebase_data_source_impl.dart';
@@ -74,10 +73,6 @@ void _registerAuthDependencies() {
 
   serviceLocator.registerLazySingleton<SignInUseCase>(
     () => SignInUseCase(serviceLocator<AuthRepository>()),
-  );
-
-  serviceLocator.registerLazySingleton<SignUpUseCase>(
-    () => SignUpUseCase(serviceLocator<AuthRepository>()),
   );
 
   serviceLocator.registerLazySingleton<SignOutUseCase>(
@@ -161,7 +156,6 @@ void _registerBlocs() {
   serviceLocator.registerFactory<AuthBloc>(
     () => AuthBloc(
       signInUseCase: serviceLocator<SignInUseCase>(),
-      signUpUseCase: serviceLocator<SignUpUseCase>(),
       signOutUseCase: serviceLocator<SignOutUseCase>(),
       getCurrentUserUseCase: serviceLocator<GetCurrentUserUseCase>(),
     ),

@@ -5,8 +5,7 @@ import '../../domain/use_cases/get_current_user_use_case.dart';
 import '../../domain/use_cases/sign_in_params.dart';
 import '../../domain/use_cases/sign_in_use_case.dart';
 import '../../domain/use_cases/sign_out_use_case.dart';
-import '../../domain/use_cases/sign_up_params.dart';
-import '../../domain/use_cases/sign_up_use_case.dart';
+
 import 'auth_event.dart';
 import 'auth_state.dart';
 
@@ -14,22 +13,18 @@ import 'auth_state.dart';
 /// Solo este componente importa los use_cases para satisfacer la lógica de UI.
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final SignInUseCase _signInUseCase;
-  final SignUpUseCase _signUpUseCase;
   final SignOutUseCase _signOutUseCase;
   final GetCurrentUserUseCase _getCurrentUserUseCase;
 
   AuthBloc({
     required SignInUseCase signInUseCase,
-    required SignUpUseCase signUpUseCase,
     required SignOutUseCase signOutUseCase,
     required GetCurrentUserUseCase getCurrentUserUseCase,
   })  : _signInUseCase = signInUseCase,
-        _signUpUseCase = signUpUseCase,
         _signOutUseCase = signOutUseCase,
         _getCurrentUserUseCase = getCurrentUserUseCase,
         super(const AuthInitial()) {
     on<SignInRequested>(_onSignInRequested);
-    on<SignUpRequested>(_onSignUpRequested);
     on<SignOutRequested>(_onSignOutRequested);
     on<CheckAuthStatus>(_onCheckAuthStatus);
   }
@@ -52,24 +47,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  Future<void> _onSignUpRequested(
-    SignUpRequested event,
-    Emitter<AuthState> emit,
-  ) async {
-    final result = await _signUpUseCase(SignUpParams(
-      email: event.email,
-      password: event.password,
-      fullName: event.fullName,
-    ));
-
-    if (result.isSuccess) {
-      emit(AuthAuthenticated(user: result.data!));
-    } else {
-      emit(AuthError(message: result.error!));
-      await Future.delayed(const Duration(milliseconds: 100));
-      emit(const AuthUnauthenticated());
-    }
-  }
 
   Future<void> _onSignOutRequested(
     SignOutRequested event,

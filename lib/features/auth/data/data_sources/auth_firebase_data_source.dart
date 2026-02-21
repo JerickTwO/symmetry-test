@@ -8,12 +8,6 @@ abstract class AuthFirebaseDataSource {
     required String password,
   });
 
-  Future<UserModel> signUp({
-    required String email,
-    required String password,
-    required String fullName,
-  });
-
   Future<void> signOut();
 
   Future<UserModel?> getCurrentUser();

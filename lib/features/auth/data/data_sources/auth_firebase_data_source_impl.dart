@@ -39,42 +39,6 @@ class AuthFirebaseDataSourceImpl implements AuthFirebaseDataSource {
   }
 
   @override
-  Future<UserModel> signUp({
-    required String email,
-    required String password,
-    required String fullName,
-  }) async {
-    try {
-      final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-
-      final user = userCredential.user;
-      if (user == null) {
-        throw Exception('Error al crear el usuario');
-      }
-
-      final userModel = UserModel(
-        uid: user.uid,
-        email: email,
-        fullName: fullName,
-        createdAt: DateTime.now(),
-      );
-
-      if (!kIsWeb) {
-        await _saveUserToFirestore(userModel);
-      }
-
-      return userModel;
-    } on FirebaseAuthException catch (e) {
-      throw _mapSignUpException(e);
-    } catch (e) {
-      throw Exception('Error al registrarse: $e');
-    }
-  }
-
-  @override
   Future<void> signOut() async {
     await _firebaseAuth.signOut();
   }
@@ -144,19 +108,4 @@ class AuthFirebaseDataSourceImpl implements AuthFirebaseDataSource {
     }
   }
 
-  Exception _mapSignUpException(FirebaseAuthException e) {
-    switch (e.code) {
-      case 'email-already-in-use':
-        return Exception('Ya existe una cuenta con este correo electrónico');
-      case 'invalid-email':
-        return Exception('El correo electrónico no es válido');
-      case 'weak-password':
-        return Exception(
-            'La contraseña es muy débil. Debe tener al menos 6 caracteres');
-      case 'operation-not-allowed':
-        return Exception('El registro de usuarios está deshabilitado');
-      default:
-        return Exception('Error al registrarse: ${e.message}');
-    }
-  }
 }
