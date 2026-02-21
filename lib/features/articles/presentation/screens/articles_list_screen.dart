@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../auth/presentation/bloc/auth_bloc.dart';
 import '../../../auth/presentation/bloc/auth_event.dart';
+import '../../../auth/presentation/bloc/auth_state.dart' as auth;
 import '../../domain/entities/article_entity.dart';
 import '../bloc/article_bloc.dart';
 import '../bloc/article_event.dart';
@@ -66,15 +67,13 @@ class ArticlesListScreen extends StatelessWidget {
           return _buildEmptyState();
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          final result =
-              await Navigator.of(context).pushNamed('/create-article');
-          if (result == true && context.mounted) {
-            context.read<ArticleBloc>().add(const LoadArticles());
-          }
+      floatingActionButton: BlocBuilder<AuthBloc, auth.AuthState>(
+        builder: (context, authState) {
+          return FloatingActionButton(
+            onPressed: () => _handleCreateArticle(context, authState),
+            child: const Icon(Icons.add),
+          );
         },
-        child: const Icon(Icons.add),
       ),
     );
   }
@@ -135,14 +134,7 @@ class ArticlesListScreen extends StatelessWidget {
               }
             },
             onDelete: () => _confirmDelete(context, article),
-            onEdit: () async {
-              final result = await Navigator.of(context).pushNamed(
-                '/edit-article/${article.id}',
-              );
-              if (result == true && context.mounted) {
-                context.read<ArticleBloc>().add(const LoadArticles());
-              }
-            },
+            onEdit: () => _handleEditArticle(context, article),
           );
         },
       ),
@@ -171,6 +163,40 @@ class ArticlesListScreen extends StatelessWidget {
             child: const Text('Eliminar'),
           ),
         ],
+      ),
+    );
+  }
+
+  Future<void> _handleCreateArticle(BuildContext context, auth.AuthState authState) async {
+    if (authState is auth.AuthAuthenticated) {
+      final result = await Navigator.of(context).pushNamed('/create-article');
+      if (result == true && context.mounted) {
+        context.read<ArticleBloc>().add(const LoadArticles());
+      }
+    } else {
+      _showAuthRequiredMessage(context);
+    }
+  }
+
+  Future<void> _handleEditArticle(BuildContext context, ArticleEntity article) async {
+    final authState = context.read<AuthBloc>().state;
+    if (authState is auth.AuthAuthenticated) {
+      final result = await Navigator.of(context).pushNamed(
+        '/edit-article/${article.id}',
+      );
+      if (result == true && context.mounted) {
+        context.read<ArticleBloc>().add(const LoadArticles());
+      }
+    } else {
+      _showAuthRequiredMessage(context);
+    }
+  }
+
+  void _showAuthRequiredMessage(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('You must be logged in to edit or create articles'),
+        backgroundColor: Colors.orange,
       ),
     );
   }

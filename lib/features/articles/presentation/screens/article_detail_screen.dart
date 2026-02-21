@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../auth/presentation/bloc/auth_bloc.dart';
+import '../../../auth/presentation/bloc/auth_state.dart' as auth;
 import '../../domain/entities/article_entity.dart';
 import '../bloc/article_bloc.dart';
 import '../bloc/article_state.dart';
@@ -90,11 +92,21 @@ class ArticleDetailScreen extends StatelessWidget {
   }
 
   Future<void> _navigateToEdit(BuildContext context) async {
-    final result = await Navigator.of(context).pushNamed(
-      '/edit-article/${article.id}',
-    );
-    if (result == true && context.mounted) {
-      Navigator.of(context).pop(true);
+    final authState = context.read<AuthBloc>().state;
+    if (authState is auth.AuthAuthenticated) {
+      final result = await Navigator.of(context).pushNamed(
+        '/edit-article/${article.id}',
+      );
+      if (result == true && context.mounted) {
+        Navigator.of(context).pop(true);
+      }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('You must be logged in to edit articles'),
+          backgroundColor: Colors.orange,
+        ),
+      );
     }
   }
 

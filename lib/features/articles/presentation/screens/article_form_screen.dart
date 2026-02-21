@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../../auth/presentation/bloc/auth_bloc.dart';
-import '../../../auth/presentation/bloc/auth_state.dart' as auth;
 import '../../domain/entities/article_entity.dart';
 import '../../domain/entities/category_entity.dart';
 import '../bloc/article_bloc.dart';

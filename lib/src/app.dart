@@ -12,7 +12,6 @@ import '../features/articles/presentation/screens/public_articles_screen.dart';
 import '../features/auth/presentation/bloc/auth_bloc.dart';
 import '../features/auth/presentation/bloc/auth_event.dart';
 import '../features/auth/presentation/bloc/auth_state.dart';
-import '../features/auth/presentation/screens/signin_screen.dart';
 import '../features/splash/presentation/screens/splash_screen.dart';
 import '../service_locator.dart';
 import 'settings/settings_controller.dart';
